@@ -12,11 +12,22 @@ ______________________________________________________________________________
 |/_____/ |__/|__/      |___/___/_____/_____/\____/ /_/  \____/_____/_____/   |
 |____________________________________________________________________________|
 """
+
+aviso = r"""
+____________________________________________________________________________________________________________
+Importante: Este es un proyecto con fines didacticos que desarrollé en Python usando la biblioteca pytube  |
+para descargar videos de YouTube. ¡Siéntete libre de probarlo! Sin embargo, es importante destacar que el  |
+propósito es puramente educativo, y el proyecto no respalda la infracción de derechos de autor ni prácticas|
+ilegales. Al descargar o utilizar este software,comprendes y aceptas que no me hago responsable de su uso. |
+Diviértete explorando y aprendiendo!                                                                       |
+___________________________________________________________________________________________________________|
+"""
 init(autoreset=True)
 texto_azul = f"{Fore.BLUE}{texto}{Style.RESET_ALL}"
 print(texto_azul)
 
-print('Descargador de videos de YouTube creado por Steven Layna Gonzalez.')
+print(f"{Fore.BLUE}Descargador de videos de YouTube creado por Steven Layna Gonzalez.{Style.RESET_ALL}")
+print(f"{Fore.RED}{aviso}{Style.RESET_ALL}")
 print('Nota: Para pegar la URL del video solo presiona click Derecho.')
 
 while True:
