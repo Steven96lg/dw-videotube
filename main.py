@@ -14,13 +14,13 @@ ______________________________________________________________________________
 """
 
 aviso = r"""
-____________________________________________________________________________________________________________
-Importante: Este es un proyecto con fines didacticos que desarrollé en Python usando la biblioteca pytube  |
-para descargar videos de YouTube. ¡Siéntete libre de probarlo! Sin embargo, es importante destacar que el  |
-propósito es puramente educativo, y el proyecto no respalda la infracción de derechos de autor ni prácticas|
-ilegales. Al descargar o utilizar este software,comprendes y aceptas que no me hago responsable de su uso. |
-Diviértete explorando y aprendiendo!                                                                       |
-___________________________________________________________________________________________________________|
+ _____________________________________________________________________________________________________________
+ |Importante: Este es un proyecto con fines didacticos que desarrollé en Python usando la biblioteca pytube  |
+ |para descargar videos de YouTube. ¡Siéntete libre de probarlo! Sin embargo, es importante destacar que el  |
+ |propósito es puramente educativo, y el proyecto no respalda la infracción de derechos de autor ni prácticas|
+ |ilegales. Al descargar o utilizar este software,comprendes y aceptas que no me hago responsable de su uso. |
+ |Diviértete explorando y aprendiendo!                                                                       |
+ |___________________________________________________________________________________________________________|
 """
 init(autoreset=True)
 texto_azul = f"{Fore.BLUE}{texto}{Style.RESET_ALL}"
@@ -48,14 +48,16 @@ while True:
 
         if format_video == '.mp3':
             format_video = format_video
-            print(f"{Fore.GREEN}Descargando archivo en formato {format_video} ...{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}Descargando archivo en formato Audio {format_video} ...{Style.RESET_ALL}")
             # Obtener el stream de audio en formato MP3
             audio_stream = dw_videotube.streams.filter(only_audio=True).first()
+            subdirectory = "Audios"
         else:
             format_video = '.mp4'
-            print(f"{Fore.GREEN}Descargando archivo en formato {format_video} ...{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}Descargando archivo en formato Video {format_video} ...{Style.RESET_ALL}")
             # Obtener el stream de video y audio en formato MP4
             audio_stream = dw_videotube.streams.filter(file_extension='mp4', res='720p').first()
+            subdirectory = "Videos"
 
         # Obtener el directorio actual del ejecutable
         script_directory = os.getcwd()
@@ -64,14 +66,18 @@ while True:
         archivos_directory = os.path.join(script_directory, "Archivos")
         os.makedirs(archivos_directory, exist_ok=True)
 
+        # Crear el subdirectorio dentro de "Archivos"
+        subdirectory_path = os.path.join(archivos_directory, subdirectory)
+        os.makedirs(subdirectory_path, exist_ok=True)
+
         # Limpiar el título del video para un nombre de archivo seguro
         video_title = "".join(c for c in dw_videotube.title if c.isalnum() or c.isspace() or c in ['_', '-'])
 
         # Construir la ruta completa para la descarga en la carpeta "Archivos"
-        dw_download_path = os.path.join(archivos_directory, f"{video_title}{format_video}")
+        dw_download_path = os.path.join(subdirectory_path, f"{video_title}{format_video}")
 
         # Descargar el archivo
-        audio_stream.download(output_path=archivos_directory, filename=f"{video_title}{format_video}")
+        audio_stream.download(output_path=subdirectory_path, filename=f"{video_title}{format_video}")
 
         print(f"{Fore.GREEN}El archivo se descargó de manera Exitosa {Style.RESET_ALL}")
 
